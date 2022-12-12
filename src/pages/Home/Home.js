@@ -8,7 +8,7 @@ import WalletForm from './WalletForm';
 const Home = () => {
     const { selectedNetwork } = useContext(NetworksContext);
     return (
-        <Box sx={{ backgroundColor: "#fafafa", minHeight:1000 }}>
+        <Box component="section" sx={{ backgroundColor: "#fafafa", minHeight:1000 }}>
         <Notice />
         <Container maxWidth="lg">
           <Box sx={{ py: 6 }}>

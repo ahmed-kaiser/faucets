@@ -11,18 +11,23 @@ import MenuItem from "@mui/material/MenuItem";
 import { useContext, useState } from "react";
 import { NetworksContext } from "../context/NetworksContext";
 import { Stack } from "@mui/system";
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import WalletIcon from '@mui/icons-material/Wallet';
-import { useTheme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import WalletIcon from "@mui/icons-material/Wallet";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { Link } from "react-router-dom";
 
-const settings = ["Log In", "Sign Up", "FAQ"];
+const pages = [
+  { title: "Log In", to: "/login" },
+  { title: "Sign Up", to: "/signup" },
+  { title: "FAQ", to: "/faq" },
+];
 
 function Navbar() {
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.up('sm'));
+  const matches = useMediaQuery(theme.breakpoints.up("sm"));
   const { networks, selectedNetwork, setSelectedNetwork } =
-  useContext(NetworksContext);
+    useContext(NetworksContext);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [anchorElNetwork, setAnchorElNetwork] = useState(null);
 
@@ -43,12 +48,12 @@ function Navbar() {
   const handleCloseNetworksMenu = (network) => {
     setAnchorElNetwork(null);
     if (network) {
-        setSelectedNetwork(network);
+      setSelectedNetwork(network);
     }
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: "#fff" }}>
+    <AppBar position="static" sx={{ backgroundColor: "#eceff1", boxShadow: 0 }}>
       <Container maxWidth="lg">
         <Toolbar disableGutters>
           <Typography
@@ -66,19 +71,28 @@ function Navbar() {
               flexGrow: 1,
             }}
           >
-            Faucets
+            <Link to="/" style={{ textDecoration: "none", color: "#26a69a" }}>
+              Faucets
+            </Link>
           </Typography>
-          <Stack direction="row" alignItems="center" spacing={matches? 2 : 1}>
+
+          <Stack direction="row" alignItems="center" spacing={matches ? 2 : 1}>
             {/* -------- Currency button -------- */}
-            <Box sx={{fontFamily: 'Varela Round', fontSize: ".9rem"}}>
+            <Box sx={{ fontFamily: "Varela Round", fontSize: ".9rem" }}>
               <Button
                 variant="outlined"
                 size="medium"
                 onClick={handleOpenNetworksMenu}
-                sx={{ textTransform: 'capitalize' }}
+                sx={{ textTransform: "capitalize" }}
               >
-                <img src={selectedNetwork.img} alt={selectedNetwork.title} style={{ height: '15px', width: '15px', marginRight: "6px"}}/>
-                <span style={{ display: !matches && "none" }}>{selectedNetwork.title}</span>
+                <img
+                  src={selectedNetwork.img}
+                  alt={selectedNetwork.title}
+                  style={{ height: "15px", width: "15px", marginRight: "6px" }}
+                />
+                <span style={{ display: !matches && "none" }}>
+                  {selectedNetwork.title}
+                </span>
                 <ExpandMoreIcon />
               </Button>
               <Menu
@@ -102,7 +116,15 @@ function Navbar() {
                     key={networks.title}
                     onClick={() => handleCloseNetworksMenu(networks)}
                   >
-                    <img src={networks.img} alt={networks.title} style={{ height: '15px', width: '15px', marginRight: "6px"}}/>
+                    <img
+                      src={networks.img}
+                      alt={networks.title}
+                      style={{
+                        height: "15px",
+                        width: "15px",
+                        marginRight: "6px",
+                      }}
+                    />
                     <Typography textAlign="center">{networks.title}</Typography>
                   </MenuItem>
                 ))}
@@ -113,10 +135,12 @@ function Navbar() {
               <Button
                 variant="outlined"
                 size="medium"
-                sx={{ textTransform: 'capitalize' }}
+                sx={{ textTransform: "capitalize" }}
               >
                 <WalletIcon />
-                <span style={{ display: !matches && "none" }}>Connect Wallet</span>
+                <span style={{ display: !matches && "none" }}>
+                  Connect Wallet
+                </span>
               </Button>
             </Box>
             {/* -------- User button -------- */}
@@ -140,9 +164,18 @@ function Navbar() {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
+                {pages.map((page) => (
+                  <MenuItem key={page.title} onClick={handleCloseUserMenu}>
+                    <Link
+                      to={page.to}
+                      style={{
+                        textDecoration: "none",
+                        color: "black",
+                        padding: "0 5px",
+                      }}
+                    >
+                      <Typography>{page.title}</Typography>
+                    </Link>
                   </MenuItem>
                 ))}
               </Menu>
