@@ -9,7 +9,7 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import { useContext, useState } from "react";
-import { CurrencyContext } from "../context/CurrencyContext";
+import { NetworksContext } from "../context/NetworksContext";
 import { Stack } from "@mui/system";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import WalletIcon from '@mui/icons-material/Wallet';
@@ -22,7 +22,7 @@ function Navbar() {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
   const { networks, selectedNetwork, setSelectedNetwork } =
-  useContext(CurrencyContext);
+  useContext(NetworksContext);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [anchorElNetwork, setAnchorElNetwork] = useState(null);
 
@@ -97,7 +97,7 @@ function Navbar() {
                 open={Boolean(anchorElNetwork)}
                 onClose={() => handleCloseNetworksMenu()}
               >
-                {networks.map((currency) => (
+                {networks.map((networks) => (
                   <MenuItem
                     key={networks.title}
                     onClick={() => handleCloseNetworksMenu(networks)}
