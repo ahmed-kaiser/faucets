@@ -39,6 +39,7 @@ const RegisterForm = ({ title, link, message }) => {
         alignItems: "center",
         minHeight: 800,
         bgcolor: "#fafafa",
+        px: 1,
       }}
     >
       <Box

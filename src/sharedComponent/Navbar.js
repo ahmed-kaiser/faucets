@@ -16,6 +16,8 @@ import WalletIcon from "@mui/icons-material/Wallet";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { Link } from "react-router-dom";
+import WalletModal from "./WalletModal";
+import profileImage from "../assets/images/d-profile.jpg";
 
 const pages = [
   { title: "Log In", to: "/login" },
@@ -30,6 +32,7 @@ function Navbar() {
     useContext(NetworksContext);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [anchorElNetwork, setAnchorElNetwork] = useState(null);
+  const [showWalletModal, setShowWalletModal] = useState(false);
 
   const handleOpenUserMenu = (event) => {
     setAnchorElNetwork(null);
@@ -52,6 +55,10 @@ function Navbar() {
     }
   };
 
+  const handleWalletModal = (event) => {
+    setShowWalletModal(!showWalletModal);
+  };
+
   return (
     <AppBar position="static" sx={{ backgroundColor: "#eceff1", boxShadow: 0 }}>
       <Container maxWidth="lg">
@@ -59,11 +66,10 @@ function Navbar() {
           <Typography
             variant="h2"
             noWrap
-            component="a"
+            component="span"
             href="/"
             sx={{
               mr: 2,
-              fontFamily: "monospace",
               fontWeight: 600,
               color: "#333333",
               textDecoration: "none",
@@ -136,17 +142,22 @@ function Navbar() {
                 variant="outlined"
                 size="medium"
                 sx={{ textTransform: "capitalize" }}
+                onClick={handleWalletModal}
               >
                 <WalletIcon />
                 <span style={{ display: !matches && "none" }}>
                   Connect Wallet
                 </span>
               </Button>
+              <WalletModal
+                handleWallet={handleWalletModal}
+                showModal={showWalletModal}
+              />
             </Box>
             {/* -------- User button -------- */}
             <Box>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Remy Sharp" src={profileImage} />
               </IconButton>
               <Menu
                 sx={{ mt: "45px" }}

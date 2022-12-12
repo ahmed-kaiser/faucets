@@ -23,10 +23,12 @@ const WalletForm = () => {
           <InputField value="0.5 ETH" disable={true} />
         </Box>
       </Box>
-      <Box sx={{ my:1 }}>
+      <Box sx={{ my: 1 }}>
         <ReCAPTCHA sitekey={process.env.REACT_APP_CAPTCHA_SITE_KEY} />
       </Box>
-      <Button variant="contained" sx={{ textTransform: 'capitalize' }}>Send Request</Button>
+      <Button variant="contained" sx={{ textTransform: "capitalize" }}>
+        Send Request
+      </Button>
     </Box>
   );
 };

@@ -6,34 +6,32 @@ import Login from "../pages/Login/Login";
 import Signup from "../pages/Signup/Signup";
 
 const Routes = () => {
-    const router = createBrowserRouter([
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Root />,
+      children: [
         {
-            path: '/',
-            element: <Root />,
-            children: [
-                {
-                    path: '/',
-                    element: <Home />
-                },
-                {
-                    path: '/login',
-                    element: <Login />
-                },
-                {
-                    path: '/signup',
-                    element: <Signup />
-                },
-                {
-                    path: '/faq',
-                    element: <FAQ />
-                }
-            ]
-        }
-    ]);
+          path: "/",
+          element: <Home />,
+        },
+        {
+          path: "/login",
+          element: <Login />,
+        },
+        {
+          path: "/signup",
+          element: <Signup />,
+        },
+        {
+          path: "/faq",
+          element: <FAQ />,
+        },
+      ],
+    },
+  ]);
 
-    return(
-        <RouterProvider router={router} />
-    );
-}
+  return <RouterProvider router={router} />;
+};
 
 export default Routes;
