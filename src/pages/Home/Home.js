@@ -2,12 +2,13 @@ import { Alert, Box, Container, Typography } from '@mui/material';
 import React, { useContext } from 'react';
 import { NetworksContext } from '../../context/NetworksContext';
 import Notice from './Notice';
+import TransactionHistory from './TransactionHistory';
 import WalletForm from './WalletForm';
 
 const Home = () => {
     const { selectedNetwork } = useContext(NetworksContext);
     return (
-        <Box sx={{ backgroundColor: "#fafafa", py:6, minHeight:1000 }}>
+        <Box sx={{ backgroundColor: "#fafafa", minHeight:1000 }}>
         <Notice />
         <Container maxWidth="lg">
           <Box sx={{ py: 6 }}>
@@ -26,6 +27,7 @@ const Home = () => {
           <Box sx={{ p:2, backgroundColor: "#fff", borderRadius: "5px" }}>
              <Alert severity="info">Your wallet is connected to <Box component="span" sx={{ fontWeight: 'bold' }}>{selectedNetwork.title}</Box>, so you are requesting <Box component="span" sx={{ fontWeight: 'bold' }}>{selectedNetwork.title}</Box> Link/ETH.</Alert>
              <WalletForm />
+             <TransactionHistory />
           </Box>
         </Container>
       </Box>
